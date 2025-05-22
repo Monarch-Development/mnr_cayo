@@ -1,0 +1,74 @@
+                    MONARCH DEVELOPMENT LICENSE v1.0
+                Copyright (C) 2025 Monarch Development
+
+This software is provided "as is", without warranty of any kind, express or
+implied, including but not limited to the warranties of merchantability, fitness
+for a particular purpose, and non-infringement. In no event shall the licensor
+be liable for any claim, damages, or other liability, whether in an action of
+contract, tort, or otherwise, arising from, out of, or in connection with the
+software or the use or other dealings in the software.
+
+DEFINED TERMS
+For the purposes of this License, the following terms shall have the meanings set
+forth below:
+
+- "Software": the complete package of source code, configuration files, scripts,
+assets, data, and any other content included and provided under this License.
+- "Licensor": Monarch Development, the individual or entity holding exclusive
+rights to the Software and granting usage rights under the terms of this License.
+- "User": any natural person or legal entity who accesses, installs, copies, uses,
+or otherwise interacts with the Software.
+- "Personal use": the use of the Software by the User exclusively on their own
+FiveM server, without any form of direct or indirect commercial or financial
+benefit.
+- "Commercial use": any use of the Software that is directly involved in generating
+financial gain, including but not limited to selling access to features powered by
+the Software, charging for services that rely on the Software, or accepting donations
+or sponsorships explicitly tied to its functionality or presence on a server. General
+server monetization is not restricted, provided it does not depend on or promote the
+use of the Software as part of its value offering.
+- "Distribution": any action that involves sharing, publishing, uploading,
+transferring, or otherwise making the Software or its copies/modifications available
+to third parties.
+- "Authorized organization": an entity explicitly granted written permission by the
+Licensor to use the Software for commercial purposes.
+
+LICENSE GRANT
+The licensor grants the user a limited, non-exclusive, non-transferable, and
+revocable license to use this software exclusively on their own FiveM server,
+subject to the following conditions.
+
+USE CONDITIONS
+The user is NOT permitted to:
+- Redistribute, share, sell, or publish the software in any form.
+- Modify the resource name or remove references to the original author.
+- Use the software for commercial purposes.
+- Incorporate it into third-party packages, frameworks or distributions.
+- Decompile, reverse-engineer, or attempt to extract the source code by any
+means.
+- Remove or alter this license text or any copyright notices included in the
+software.
+- Use the software for illegal, fraudulent, or malicious purposes, including
+but not limited to cheating, scamming, or unauthorized modifications of FiveM
+servers.
+
+COMMERCIAL RIGHTS
+- Commercial use of the Software, including but not limited to monetization and
+sponsorship, is exclusively reserved for the Licensor and authorized members of
+the Licensor’s organization.
+- Only the Licensor and its authorized organization members may use the Software
+for financial gain or to promote other products or services.
+- Third parties are strictly prohibited from using the Software for any commercial
+purpose, including—but not limited to—selling access to features powered by the Software,
+charging for services that rely on theSoftware, or receiving donations or sponsorships
+explicitly tied to its functionality or presence.
+- General server monetization is permitted, provided it does not depend on, include,
+promote, or leverage the Software as part of the monetized offering.
+
+LICENSE UPDATES
+The licensor reserves the right to update or modify this license at any time.
+Future versions of this software may be subject to different terms.
+
+LICENSE TERMINATION
+Failure to comply with any provision of this license will result in the
+immediate revocation of the granted rights.
