@@ -266,10 +266,6 @@ return {
     "h4_islandairstrip_propsb",
     "h4_islandairstrip_propsb_lod",
     "h4_islandairstrip_propsb_slod",
-    "h4_islandairstrip_doorsclosed",
-    "h4_islandairstrip_doorsclosed_lod",
-    "h4_islandairstrip_doorsopen",
-    "h4_islandairstrip_doorsopen_lod",
     "h4_islandairstrip_hangar_props",
     "h4_islandairstrip_hangar_props_lod",
     "h4_islandairstrip_hangar_props_slod",
@@ -305,6 +301,10 @@ return {
     "h4_islandx_mansion",
     "h4_mansion_gate_closed",
 
+    -- Hangar doors ymaps
+    "h4_islandairstrip_doorsopen",
+    "h4_islandairstrip_doorsopen_lod",
+
     -- Random Objects in Diamond Casino (OPTIONAL)
     -- "h4_yacht",
     -- "h4_yacht_long_0",
@@ -333,6 +333,8 @@ return {
     -- Gates (OPTIONAL)
     -- "h4_mansion_gate_broken",            --> Mansion Main Entrance Gate (Broken)
     -- "h4_underwater_gate_closed",         --> Gate Under Mansion
+    -- "h4_islandairstrip_doorsclosed",     --> For closed hangar doors
+    -- "h4_islandairstrip_doorsclosed_lod", --> For closed hangar doors
 
     -- Yatchs (OPTIONAL: 3 yachts in Los Santos coasts)
     -- "h4_islandx_yacht_01",
