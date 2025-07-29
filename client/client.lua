@@ -9,16 +9,20 @@ SetAmbientZoneListStatePersistent("AZL_DLC_Hei4_Island_Zones", true, true)
 SetAmbientZoneListStatePersistent("AZL_DLC_Hei4_Island_Disabled_Zones", false, true)
 SetZoneEnabled(GetZoneFromNameId("PrLog"), false)
 
+local function toggleIslandFix(toggle)
+    local status = toggle and 1 or 0
+    SetAiGlobalPathNodesType(status)
+    LoadGlobalWaterType(status)
+end
+
 lib.points.new({
     coords = vec3(5046, -5106, 6),
     distance = 2500,
     onEnter = function()
-        SetAiGlobalPathNodesType(1)
-        LoadGlobalWaterType(1)
+        toggleIslandFix(true)
     end,
     onExit = function()
-        SetAiGlobalPathNodesType(0)
-        LoadGlobalWaterType(0)
+        toggleIslandFix(false)
     end,
 })
 
@@ -28,4 +32,5 @@ AddEventHandler("onResourceStop", function(resourceName)
     for _, ipl in pairs(island) do
         RemoveIpl(ipl)
     end
+    toggleIslandFix(false)
 end)
