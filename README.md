@@ -1,5 +1,5 @@
 ## Monarch Cayo
-![1280x720|Monarch Cayo Cover](https://www.dropbox.com/scl/fi/y8t8r9cdi2wh8zuyclspe/mnr_cayo.png?rlkey=3r3t1lg9s1nc8dsqwaslfq9ok&dl=1)
+![mnr_cayo](https://raw.githubusercontent.com/Monarch-Development/.github/refs/heads/main/release_images/mnr_cayo.png)
 
 A simple loader of the IPLs of Cayo Perico island, it loads the island only once at player login and loads only what is strictly necessary for it to work without bugs elsewhere
 
