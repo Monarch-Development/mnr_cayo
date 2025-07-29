@@ -3,9 +3,9 @@ game "gta5"
 lua54 "yes"
 
 name "mnr_cayo"
-description "Cayo Perico loader script"
+description "Cayo Perico Island Loader"
 author "IlMelons"
-version "1.0.3"
+version "1.1.0"
 repository "https://github.com/Monarch-Development/mnr_cayo"
 
 this_is_a_map "yes"
