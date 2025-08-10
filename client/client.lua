@@ -1,8 +1,9 @@
-local island = lib.load('data.island')
+local ipls = lib.load('data.ipls')
 
-for _, ipl in pairs(island) do
-    RequestIpl(ipl)
+for _, name in pairs(ipls) do
+    RequestIpl(name)
 end
+
 local islandZoneId = GetZoneFromNameId('PrLog')
 SetAudioFlag('DisableFlightMusic', true)
 SetAmbientZoneListStatePersistent('AZL_DLC_Hei4_Island_Zones', true, true)
@@ -29,8 +30,8 @@ lib.points.new({
 AddEventHandler('onResourceStop', function(resourceName)
     local scriptName = cache.resource or GetCurrentResourceName()
     if resourceName ~= scriptName then return end
-    for _, ipl in pairs(island) do
-        RemoveIpl(ipl)
+    for _, name in pairs(ipls) do
+        RemoveIpl(name)
     end
     toggleIslandFix(false)
 end)
