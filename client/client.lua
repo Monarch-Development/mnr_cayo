@@ -1,13 +1,13 @@
-local island = lib.load("data.island")
+local island = lib.load('data.island')
 
 for _, ipl in pairs(island) do
     RequestIpl(ipl)
 end
-
-SetAudioFlag("DisableFlightMusic", true)
-SetAmbientZoneListStatePersistent("AZL_DLC_Hei4_Island_Zones", true, true)
-SetAmbientZoneListStatePersistent("AZL_DLC_Hei4_Island_Disabled_Zones", false, true)
-SetZoneEnabled(GetZoneFromNameId("PrLog"), false)
+local islandZoneId = GetZoneFromNameId('PrLog')
+SetAudioFlag('DisableFlightMusic', true)
+SetAmbientZoneListStatePersistent('AZL_DLC_Hei4_Island_Zones', true, true)
+SetAmbientZoneListStatePersistent('AZL_DLC_Hei4_Island_Disabled_Zones', false, true)
+SetZoneEnabled(islandZoneId, false)
 
 local function toggleIslandFix(toggle)
     local status = toggle and 1 or 0
@@ -26,7 +26,7 @@ lib.points.new({
     end,
 })
 
-AddEventHandler("onResourceStop", function(resourceName)
+AddEventHandler('onResourceStop', function(resourceName)
     local scriptName = cache.resource or GetCurrentResourceName()
     if resourceName ~= scriptName then return end
     for _, ipl in pairs(island) do
