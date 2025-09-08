@@ -11,9 +11,9 @@ After years of missing an updated and optimized resource for the category I pres
 - Preset: removed all car generators
 
 ## Presets
-- [NO CARGEN](https://github.com/Monarch-Development/Monarch-Presets/tree/main/cayo/nocargen)
+- [NO CARGEN](https://github.com/Monarch-Development/monarch_presets/tree/main/Monarch/mnr_cayo)
 
 ## Links
 - [Discord](https://discord.gg/WKtk65yBC6)
-- [Documentation](https://monarch-docs.ricodev.it/docs/monarch-resources/mnr_cayo)
+- [Documentation](https://monarch-development.pages.dev/docs/monarch-resources/mnr_cayo)
 - [Cfx Forum Post](https://forum.cfx.re/t/free-cayo-perico-loader-monarch-cayo/5342572)
