@@ -10,18 +10,7 @@ repository 'https://github.com/Monarch-Development/mnr_cayo'
 
 this_is_a_map 'yes'
 
-shared_scripts {
-    '@ox_lib/init.lua',
-}
-
 client_scripts {
+    'config/*.lua',
     'client/*.lua',
-}
-
-server_scripts {
-    'server/*.lua',
-}
-
-files {
-    'data/*.lua',
 }
