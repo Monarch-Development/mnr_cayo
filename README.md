@@ -9,6 +9,7 @@ After years of missing an updated and optimized resource for the category I pres
 - 🌴 **One time loading:** the IPLs are loaded one time during player login.
 - ❌ **No bloatware:** all unnecessary IPLs aren’t loaded.
 - 🌊 **Water and paths:** loads dynamically water and paths with an optimized coords check.
+- 🔄️ **Restart/Stop friendly:** no 3d assets in the resource and unload system to let restart/stop the script without crash.
 - 🗺️ **Custom ymaps:** edited vanilla ymaps to make mansion gates and doors openable.
 - 🚗 **Optional preset:** removed all car generators (link below).
 
