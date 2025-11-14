@@ -5,7 +5,7 @@ lua54 'yes'
 name 'mnr_cayo'
 description 'Cayo Perico Island Loader'
 author 'IlMelons'
-version '1.1.1'
+version '2.0.0'
 repository 'https://github.com/Monarch-Development/mnr_cayo'
 
 this_is_a_map 'yes'
