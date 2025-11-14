@@ -1,14 +1,16 @@
-## Monarch Cayo
+## 🏝️ Monarch Cayo
 ![mnr_cayo](https://raw.githubusercontent.com/Monarch-Development/.github/refs/heads/main/release_images/mnr_cayo.png)
 
 After years of missing an updated and optimized resource for the category I present Monarch Cayo, an IPL loader that uses ox_lib functions to load only the IPLs needed for the island of Cayo Perico
 
 ## Features
-- Loads all required parts of the island one time during player login
-- No bloatware, all unnecessary IPLs aren’t loaded
-- Water and paths management with ox_lib points
-- Custom ymaps: hangar gates and mansion gates and doors openable
-- Preset: removed all car generators
+- ✅ **Standalone script:** no dependencies required.
+- 🚀 **Ultra optimized:** 0.00ms and only ~250KiB (Top cayo script performance).
+- 🌴 **One time loading:** the IPLs are loaded one time during player login.
+- ❌ **No bloatware:** all unnecessary IPLs aren’t loaded.
+- 🌊 **Water and paths:** loads dynamically water and paths with an optimized coords check.
+- 🗺️ **Custom ymaps:** edited vanilla ymaps to make mansion gates and doors openable.
+- 🚗 **Optional preset:** removed all car generators (link below).
 
 ## Presets
 - [NO CARGEN](https://github.com/Monarch-Development/monarch_presets/tree/main/Monarch/mnr_cayo)
