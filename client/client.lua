@@ -29,8 +29,8 @@ function cayo:toggleState(toggle)
 end
 
 function cayo:update()
-    local ped = PlayerPedId()
-    local distance = #(GetEntityCoords(ped) - self.coords)
+    local playerPed = PlayerPedId()
+    local distance = #(GetEntityCoords(playerPed) - self.coords)
 
     if distance < self.radius then
         if not self.active then
