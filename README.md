@@ -1,7 +1,7 @@
 ## 🏝️ Monarch Cayo
 ![mnr_cayo](https://raw.githubusercontent.com/Monarch-Development/.github/refs/heads/main/release_images/mnr_cayo.png)
 
-After years of missing an updated and optimized resource for the category I present Monarch Cayo, an IPL loader that uses ox_lib functions to load only the IPLs needed for the island of Cayo Perico
+After years of missing an updated and optimized resource for the category I present Monarch Cayo, an IPL loader to load only the IPLs needed for the island of Cayo Perico
 
 ## Features
 - ✅ **Standalone script:** no dependencies required.
