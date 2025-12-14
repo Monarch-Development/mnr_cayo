@@ -18,6 +18,6 @@ After years of missing an updated and optimized resource for the category I pres
 
 ## Links
 - [Discord](https://discord.gg/WKtk65yBC6)
-- [Documentation](https://monarch-development.pages.dev/docs/monarch-resources/mnr_cayo)
+- [Documentation](https://monarch-devs.com/docs/monarch-resources/mnr_cayo)
 - [Cfx Forum Post](https://forum.cfx.re/t/free-cayo-perico-loader-monarch-cayo/5342572)
-- [Repository](https://github.com/Monarch-Development/mnr_cayo)
+- [Repository](https://github.com/Monarch-Devs/mnr_cayo)
