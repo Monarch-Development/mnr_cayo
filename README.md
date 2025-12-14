@@ -14,7 +14,7 @@ After years of missing an updated and optimized resource for the category I pres
 - 🚗 **Optional preset:** removed all car generators (link below).
 
 ## Presets
-- [NO CARGEN](https://github.com/Monarch-Development/monarch_presets/tree/main/Monarch/mnr_cayo)
+- [NO CARGEN](https://github.com/Monarch-Devs/monarch_presets/tree/main/Monarch/mnr_cayo)
 
 ## Links
 - [Discord](https://discord.gg/WKtk65yBC6)
