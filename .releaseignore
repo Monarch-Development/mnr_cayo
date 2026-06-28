@@ -1,0 +1,5 @@
+.git
+.github
+.gitignore
+.releaseignore
+version.json

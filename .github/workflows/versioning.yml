@@ -1,0 +1,199 @@
+name: versioning
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: release-main
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Resolve previous bump commit
+        id: prev_bump
+        run: |
+          set -euo pipefail
+          sha="$(git log --grep='^chore(bump):' --format='%H' -n 1 || true)"
+          echo "sha=${sha}" >> "$GITHUB_OUTPUT"
+
+      - name: Read current version from fxmanifest.lua
+        id: current_version
+        run: |
+          set -euo pipefail
+          version="$(grep -oP "(?<=^version ')[0-9]+\.[0-9]+\.[0-9]+(?=')" fxmanifest.lua)"
+          if [ -z "${version}" ]; then
+            echo "::error::Could not parse version from fxmanifest.lua"
+            exit 1
+          fi
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+
+          resource_name="$(grep -oP "(?<=^name ')[^']+(?=')" fxmanifest.lua)"
+          if [ -z "${resource_name}" ]; then
+            echo "::error::Could not parse name from fxmanifest.lua"
+            exit 1
+          fi
+          echo "resource_name=${resource_name}" >> "$GITHUB_OUTPUT"
+
+      - name: Compute release plan
+        id: compute
+        env:
+          PREV_BUMP_SHA: ${{ steps.prev_bump.outputs.sha }}
+          CURRENT_VERSION: ${{ steps.current_version.outputs.version }}
+        run: |
+          set -euo pipefail
+          from_ref="${PREV_BUMP_SHA:-$(git rev-list --max-parents=0 HEAD)}"
+          node .github/scripts/versioning.mjs "${from_ref}" "HEAD" "${CURRENT_VERSION}" > release-plan.json
+
+          node -e "
+            const fs = require('fs');
+            const plan = JSON.parse(fs.readFileSync('release-plan.json', 'utf8'));
+            const lines = [
+              \`bump=\${plan.bump}\`,
+              \`version=\${plan.version}\`,
+              \`should_tag=\${plan.shouldTag}\`
+            ];
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, lines.join('\n') + '\n');
+          "
+          echo "from_ref=${from_ref}" >> "$GITHUB_OUTPUT"
+
+      - name: Update fxmanifest.lua
+        if: steps.compute.outputs.bump != 'none'
+        env:
+          NEW_VERSION: ${{ steps.compute.outputs.version }}
+        run: |
+          set -euo pipefail
+          sed -i "s/^version '[0-9]\+\.[0-9]\+\.[0-9]\+'/version '${NEW_VERSION}'/" fxmanifest.lua
+          grep -q "version '${NEW_VERSION}'" fxmanifest.lua || {
+            echo "::error::Failed to update fxmanifest.lua with new version"
+            exit 1
+          }
+
+      - name: Update version.json
+        if: steps.compute.outputs.should_tag == 'true'
+        env:
+          NEW_VERSION: ${{ steps.compute.outputs.version }}
+        run: |
+          set -euo pipefail
+          node -e "
+            const fs = require('fs');
+            const path = 'version.json';
+            const data = JSON.parse(fs.readFileSync(path, 'utf8'));
+            data.version = process.env.NEW_VERSION;
+            fs.writeFileSync(path, JSON.stringify(data, null, 4) + '\n');
+          "
+
+      - name: Commit version bump
+        if: steps.compute.outputs.bump != 'none'
+        env:
+          NEW_VERSION: ${{ steps.compute.outputs.version }}
+          BUMP_LEVEL: ${{ steps.compute.outputs.bump }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add fxmanifest.lua
+          if [ -f version.json ]; then
+            git add version.json
+          fi
+          git commit -m "chore(bump): v${NEW_VERSION} (${BUMP_LEVEL}) [skip ci]"
+
+      - name: Extract changelog
+        if: steps.compute.outputs.should_tag == 'true'
+        run: |
+          set -euo pipefail
+          node -e "
+            const fs = require('fs');
+            const plan = JSON.parse(fs.readFileSync('release-plan.json', 'utf8'));
+            fs.writeFileSync('changelog.txt', plan.changelog + '\n');
+          "
+          cat changelog.txt
+
+      - name: Build release archive
+        if: steps.compute.outputs.should_tag == 'true'
+        env:
+          VERSION: ${{ steps.compute.outputs.version }}
+          RESOURCE_NAME: ${{ steps.current_version.outputs.resource_name }}
+        run: |
+          set -euo pipefail
+
+          staging="$(mktemp -d)"
+          archive_root="${staging}/${RESOURCE_NAME}"
+          mkdir -p "${archive_root}"
+
+          # Archive from the working tree (HEAD includes the just-made bump
+          # commit), then strip anything matched by .releaseignore.
+          git archive --format=tar HEAD | tar -x -C "${archive_root}"
+
+          if [ -f .releaseignore ]; then
+            while IFS= read -r pattern; do
+              [[ -z "${pattern}" || "${pattern}" =~ ^# ]] && continue
+              find "${archive_root}" -path "${archive_root}/${pattern}" -prune -exec rm -rf {} +
+            done < .releaseignore
+          fi
+
+          zip_name="${RESOURCE_NAME}-v${VERSION}.zip"
+          (cd "${staging}" && zip -r -X -q "${GITHUB_WORKSPACE}/${zip_name}" "${RESOURCE_NAME}")
+
+          echo "ZIP_NAME=${zip_name}" >> "$GITHUB_ENV"
+
+      - name: Push version bump
+        if: steps.compute.outputs.bump != 'none'
+        run: |
+          set -euo pipefail
+          git push origin main
+
+      - name: Tag release
+        if: steps.compute.outputs.should_tag == 'true'
+        env:
+          VERSION: ${{ steps.compute.outputs.version }}
+        run: |
+          set -euo pipefail
+          git tag -a "v${VERSION}" -m "v${VERSION}"
+          git push origin "v${VERSION}"
+
+      - name: Create GitHub Release
+        if: steps.compute.outputs.should_tag == 'true'
+        id: create_release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.compute.outputs.version }}
+        run: |
+          set -euo pipefail
+          gh release create "v${VERSION}" \
+            "${ZIP_NAME}" \
+            --title "v${VERSION}" \
+            --notes-file changelog.txt
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### release"
+            echo ""
+            if [ "${{ steps.compute.outputs.bump }}" = "none" ]; then
+              echo "No qualifying commits (feat/fix/perf) found since last bump. Nothing to do."
+            else
+              echo "Bump: **${{ steps.compute.outputs.bump }}**"
+              echo "New version: **${{ steps.compute.outputs.version }}**"
+              if [ "${{ steps.compute.outputs.should_tag }}" = "true" ]; then
+                echo "Release **v${{ steps.compute.outputs.version }}** created and tag pushed."
+              else
+                echo "No tag/release created (patch-only fix/perf, no feat or breaking change) — fxmanifest.lua updated only."
+              fi
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
