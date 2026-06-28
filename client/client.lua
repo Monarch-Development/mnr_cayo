@@ -21,36 +21,6 @@ function cayo:adapt()
     SetZoneEnabled(islandZoneId, false)
 end
 
-function cayo:waterDetect()
-    if water.detector == 'auto' then
-        self.water_resource = false
-        for _, resource in ipairs(water.supported) do
-            if GetResourceState(resource.name) == 'started' then
-                self.water_resource = resource.name
-                self.water_default = resource.defaultFile
-                self.water_cayo = resource.cayoFile
-                break
-            end
-        end
-    elseif water.detector == 'force' then
-        self.water_resource = water.waterResource
-        self.water_default = water.defaultFile
-        self.water_cayo = water.cayoFile
-    end
-end
-
-function cayo:ensureWater(toggle)
-    if not self.water_resource then return end
-
-    if toggle and not self.water_cayo then return end
-    if not toggle and not self.water_default then return end
-
-    local water = toggle and self.water_cayo or self.water_default
-
-    Wait(0)
-    LoadWaterFromPath(self.water_resource, water --[[@as string]])
-end
-
 function cayo:toggleState(toggle)
     if toggle then
         SetDeepOceanScaler(0.0)
@@ -60,8 +30,6 @@ function cayo:toggleState(toggle)
 
     local status = toggle and 1 or 0
     SetAiGlobalPathNodesType(status)
-    LoadGlobalWaterType(status)
-    self:ensureWater(toggle)
     self.active = toggle
 end
 
@@ -75,7 +43,6 @@ end
 CreateThread(function()
     cayo:toggleIpls(true)
     cayo:adapt()
-    cayo:waterDetect()
     while true do
         cayo:update()
         Wait(2000)

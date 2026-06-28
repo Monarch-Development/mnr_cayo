@@ -8,7 +8,7 @@ After years of missing an updated and optimized resource for this category, I pr
 - 🚀 **Ultra optimized:** 0.00ms and only ~250KiB (best Cayo Perico script performance).
 - 🌴 **One-time loading:** the IPLs are loaded once during player login.
 - ❌ **No bloatware:** all unnecessary IPLs aren’t loaded.
-- 🌊 **Water and paths:** dynamically loads water and paths with an optimized coords check.
+- 🗺️ **Paths:** dynamically loads minimap paths with an optimized coords check.
 - 🔄️ **Restart/Stop friendly:** no 3D assets in the resource and unload system to let you restart/stop the script without crashes.
 - 🗺️ **Custom ymaps:** edited vanilla ymaps to make mansion gates and doors openable.
 - 🚗 **Optional preset:** removed all car generators (link below).
